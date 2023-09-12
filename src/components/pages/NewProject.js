@@ -13,7 +13,7 @@ function NewProject() {
         project.cost = 0
         project.services = []
 
-        fetch("http:/localhost:5000/projects", {
+        fetch("http://localhost:40059/projects", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -23,7 +23,7 @@ function NewProject() {
             .then((resp) => resp.json())
             .then((data) => {
                 console.log(data)
-                //redirect *navigate
+                navigate('/projects', {message: 'Project created successfully!'})
             })
             .catch(err => console.log(err))
 

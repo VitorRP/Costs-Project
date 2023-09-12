@@ -11,7 +11,7 @@ function ProjectFrom({ handleSubmit, btnText, projectData }) {
     const [project, setProject] = useState(projectData || {})
 
     useEffect(() => {
-        fetch("http://localhost:5000/categories",
+        fetch("http://localhost:40059/categories",
             {
                 method: "GET",
                 headers: {
@@ -37,9 +37,9 @@ function ProjectFrom({ handleSubmit, btnText, projectData }) {
     function handleCategory(e) {
         setProject({
             ...project, category: {
-                id: e.tager.value,
-                name: e.target.option[e.target.selectedIndex]
-            }
+                id: e.target.value,
+                name: e.target.options[e.target.selectedIndex].text,
+            },
         })
     }
 
@@ -51,6 +51,7 @@ function ProjectFrom({ handleSubmit, btnText, projectData }) {
                 name="name"
                 placeholder="Enter project name"
                 handleOnChange={handleChange}
+                value={project.name ? project.name : ''}
             />
             <Input
                 type="number"
@@ -58,7 +59,7 @@ function ProjectFrom({ handleSubmit, btnText, projectData }) {
                 name="budget"
                 placeholder="Enter project budget"
                 handleOnChange={handleChange}
-                
+                value={project.budget ? project.budget : ''}
             />
 
             <Select
@@ -66,7 +67,7 @@ function ProjectFrom({ handleSubmit, btnText, projectData }) {
                 text="Select the category"
                 options={categories}
                 handleOnChange={handleCategory}
-                
+                value={project.category ? project.category.id : ''}
             />
 
             <SubmitButton text={btnText} />
